@@ -20,8 +20,8 @@ const Pricing = () => {
     },
     {
       name: "Pro",
-      price: "$5.99",
-      period: "/mo",
+      price: "₹999",
+      period: "/month",
       description: "For power users and professionals",
       features: [
         "Unlimited rewrites",
