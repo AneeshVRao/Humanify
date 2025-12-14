@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/components/query-provider";
 import { AnalyticsProvider } from "@/components/analytics-provider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
             <AnalyticsProvider>
               {children}
               <Toaster />
+              <SpeedInsights />
             </AnalyticsProvider>
           </QueryProvider>
         </ThemeProvider>
