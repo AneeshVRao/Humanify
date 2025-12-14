@@ -203,8 +203,9 @@ async function humanizeWithGemini(
 
   try {
     // Use private key for Pro users, public key for free users
+    // Fallback to GEMINI_API_KEY if PRIVATE not set
     const apiKey = isPrivate
-      ? process.env.GEMINI_API_KEY_PRIVATE
+      ? (process.env.GEMINI_API_KEY_PRIVATE || process.env.GEMINI_API_KEY)
       : process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
@@ -222,7 +223,7 @@ async function humanizeWithGemini(
     const sanitizedText = sanitizeInput(text);
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-2.5-flash",
       systemInstruction: systemPrompt,
     });
 
