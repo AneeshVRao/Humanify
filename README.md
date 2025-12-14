@@ -2,9 +2,14 @@
 
 Transform AI-generated text into natural, human-sounding writing instantly.
 
+🚀 **Live App:** [https://humanify-kohl.vercel.app](https://humanify-kohl.vercel.app)
+📦 **Repository:** [https://github.com/AneeshVRao/Humanify](https://github.com/AneeshVRao/Humanify)
+
 ## Overview
 
-Humanify is a production-ready SaaS application that converts AI-generated content into natural, human-sounding text. Built with Next.js 16, it provides a seamless experience for content creators, students, and professionals who want to make their AI-generated content more authentic.
+Humanify is a **production-ready SaaS application** that converts AI-generated content into natural, human-sounding text. Built with Next.js 16 and deployed on Vercel, it provides a seamless experience for content creators, students, and professionals who want to make their AI-generated content more authentic.
+
+**Currently serving users in India** with Razorpay payment integration at ₹999/month for Pro tier.
 
 ## Tech Stack
 
@@ -20,24 +25,27 @@ Humanify is a production-ready SaaS application that converts AI-generated conte
 - **Authentication**: Supabase Auth (Email/Password)
 - **Database**: Supabase (PostgreSQL)
 - **AI Providers**:
-  - Google Gemini 2.0 Flash (Free tier)
+  - Google Gemini 2.5 Flash (Free tier - stable version)
   - Anthropic Claude 3.5 Sonnet (Pro BYOK)
-- **Payments**: Stripe (Webhook-based)
+- **Payments**:
+  - Razorpay (Primary - Indian market, ₹999/month)
+  - Stripe (Configured for international expansion)
 - **Rate Limiting**: Upstash Redis + Supabase
 - **Email**: Resend
-- **Analytics**: PostHog
+- **Analytics**: PostHog + Vercel Speed Insights
 - **Error Tracking**: Sentry
-- **Deployment**: Vercel-ready
+- **Deployment**: Vercel (Production)
 
 ## Features
 
 ### ✅ Fully Implemented
 
 #### Core Functionality
-- **AI Text Humanization**: Transform AI text with 4 tone options (Casual, Professional, Academic, Neutral)
+- **AI Text Humanization**: Transform AI text with 5 tone options (Casual, Professional, Academic, Neutral, Creative)
 - **Multi-AI Support**: Automatic provider routing (Gemini for free, Claude for Pro with BYOK)
 - **Real-time Processing**: Live feedback with loading states and progress indicators
 - **Character Limits**: 1,000 for free tier, 10,000 for Pro tier
+- **Performance Monitoring**: Vercel Speed Insights tracking Core Web Vitals
 
 #### Authentication & User Management
 - **Email/Password Auth**: Full signup, login, and session management via Supabase
@@ -265,17 +273,38 @@ WHERE email = 'your-email@example.com';
 
 ## Deployment
 
-### Vercel (Recommended)
+### Production Status ✅
 
-1. Push code to GitHub
-2. Import project to Vercel
-3. Configure environment variables (same as .env.local)
-4. Deploy!
+**Live URL:** [https://humanify-kohl.vercel.app](https://humanify-kohl.vercel.app)
+**Status:** Deployed and Running
+**Platform:** Vercel
+**Last Deploy:** Auto-deploys on push to `main` branch
 
-**Important**: After deployment, update:
-- Supabase Auth redirect URLs
-- Stripe webhook endpoint
-- NEXT_PUBLIC_APP_URL to production domain
+### Vercel Deployment Guide
+
+1. **Push code to GitHub:**
+   ```bash
+   git push origin main
+   ```
+
+2. **Import project to Vercel:**
+   - Connect GitHub repository
+   - Auto-detects Next.js configuration
+
+3. **Configure environment variables:**
+   - Add all variables from `.env.local` to Vercel
+   - Set for Production environment
+
+4. **Deploy!**
+   - Automatic deployment on every push
+   - Preview deployments for PRs
+
+**Important Post-Deployment Steps:**
+- ✅ Update Supabase Auth redirect URLs (https://humanify-kohl.vercel.app/auth/callback)
+- ✅ Configure Stripe/Razorpay webhook endpoints
+- ✅ Set NEXT_PUBLIC_APP_URL to production domain
+- ✅ Verify email domain with Resend
+- ✅ Test payment flow end-to-end
 
 ## Security
 
