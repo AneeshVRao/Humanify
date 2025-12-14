@@ -84,6 +84,14 @@ Tone: Balanced and straightforward
 - Professional but approachable
 - Objective presentation
 - Widely accessible language`,
+
+    creative: `
+Tone: Imaginative and expressive
+- Vivid, descriptive language
+- Engaging storytelling elements
+- Metaphors and creative expressions
+- Dynamic and colorful vocabulary
+- Captivating and original style`,
   };
 
   return `${basePrompt}\n\n${tonePrompts[tone]}`;
@@ -214,7 +222,7 @@ async function humanizeWithGemini(
     const sanitizedText = sanitizeInput(text);
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash-exp",
+      model: "gemini-1.5-flash",
       systemInstruction: systemPrompt,
     });
 

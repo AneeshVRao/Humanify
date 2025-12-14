@@ -38,7 +38,7 @@ const humanizeSchema = z.object({
     .string()
     .min(50, "Text must be at least 50 characters")
     .max(15000, "Text cannot exceed 15,000 characters"),
-  tone: z.enum(["casual", "professional", "academic", "neutral"] as const),
+  tone: z.enum(["casual", "professional", "academic", "neutral", "creative"] as const),
 });
 
 /**

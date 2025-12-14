@@ -360,7 +360,7 @@ export type ProRequestUpdate =
   Database["public"]["Tables"]["pro_requests"]["Update"];
 
 // Tone type
-export type Tone = "casual" | "professional" | "academic" | "neutral";
+export type Tone = "casual" | "professional" | "academic" | "neutral" | "creative";
 
 // Plan type
 export type PlanType = "free" | "pro";
