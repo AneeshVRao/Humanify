@@ -95,19 +95,24 @@ export async function isAdmin(userId: string): Promise<boolean> {
  *
  * @returns Promise<{ isAdmin: boolean; user: User | null }>
  */
-export async function checkCurrentUserIsAdmin(): Promise<{
+export async function checkCurrentUserIsAdmin(customUser?: User | null): Promise<{
   isAdmin: boolean;
   user: User | null;
 }> {
   try {
-    const supabase = await createServerSupabaseClient();
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
+    let user = customUser || null;
 
-    if (authError || !user) {
-      return { isAdmin: false, user: null };
+    if (!user) {
+      const supabase = await createServerSupabaseClient();
+      const {
+        data: { user: dbUser },
+        error: authError,
+      } = await supabase.auth.getUser();
+
+      if (authError || !dbUser) {
+        return { isAdmin: false, user: null };
+      }
+      user = dbUser;
     }
 
     const adminStatus = await isAdmin(user.id);
@@ -130,8 +135,8 @@ export async function checkCurrentUserIsAdmin(): Promise<{
  * @throws Error if user is not admin
  * @returns Promise<User> - The authenticated admin user
  */
-export async function requireAdmin(): Promise<User> {
-  const { isAdmin: userIsAdmin, user } = await checkCurrentUserIsAdmin();
+export async function requireAdmin(customUser?: User | null): Promise<User> {
+  const { isAdmin: userIsAdmin, user } = await checkCurrentUserIsAdmin(customUser);
 
   if (!userIsAdmin || !user) {
     throw new Error("Unauthorized: Admin access required");

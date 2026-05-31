@@ -67,7 +67,7 @@ async function PATCH_Handler(request: NextRequest) {
 
   // SECURITY: Verify admin access
   // This will throw an error if user is not admin
-  await requireAdmin();
+  await requireAdmin(user);
 
   // Validate request body
   const body = await validateJsonRequest(request);
