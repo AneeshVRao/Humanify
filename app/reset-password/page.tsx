@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
       setTimeout(() => {
         router.push('/dashboard');
       }, 2000);
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred. Please try again.');
       setIsLoading(false);
     }

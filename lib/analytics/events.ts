@@ -24,7 +24,7 @@ export function trackSignup(userId: string, email: string, method: 'email' | 'go
 /**
  * Track user login event
  */
-export function trackLogin(userId: string, method: 'email' | 'google') {
+export function trackLogin(_userId: string, method: 'email' | 'google') {
   trackEvent('user_logged_in', {
     method,
     timestamp: new Date().toISOString(),
@@ -65,7 +65,7 @@ export function trackHumanization(props: {
 /**
  * Track Pro request submission
  */
-export function trackProRequestSubmission(userId: string, useCase: string) {
+export function trackProRequestSubmission(_userId: string, useCase: string) {
   trackEvent('pro_request_submitted', {
     use_case_preview: useCase.substring(0, 50), // First 50 chars only
     timestamp: new Date().toISOString(),
@@ -80,7 +80,7 @@ export function trackProRequestSubmission(userId: string, useCase: string) {
 /**
  * Track Pro upgrade (successful payment)
  */
-export function trackProUpgrade(userId: string, paymentMethod: 'stripe' | 'razorpay') {
+export function trackProUpgrade(_userId: string, paymentMethod: 'stripe' | 'razorpay') {
   trackEvent('pro_upgrade_completed', {
     payment_method: paymentMethod,
     timestamp: new Date().toISOString(),
@@ -95,7 +95,7 @@ export function trackProUpgrade(userId: string, paymentMethod: 'stripe' | 'razor
 /**
  * Track API key addition (Claude BYOK)
  */
-export function trackApiKeyAdded(userId: string, provider: 'claude') {
+export function trackApiKeyAdded(_userId: string, provider: 'claude') {
   trackEvent('api_key_added', {
     provider,
     timestamp: new Date().toISOString(),
@@ -110,7 +110,7 @@ export function trackApiKeyAdded(userId: string, provider: 'claude') {
 /**
  * Track rate limit hit
  */
-export function trackRateLimitHit(userId: string, planType: string, remaining: number) {
+export function trackRateLimitHit(_userId: string, planType: string, remaining: number) {
   trackEvent('rate_limit_hit', {
     plan_type: planType,
     remaining,
@@ -121,7 +121,7 @@ export function trackRateLimitHit(userId: string, planType: string, remaining: n
 /**
  * Track character limit error
  */
-export function trackCharacterLimitError(userId: string, characterCount: number, planType: string, limit: number) {
+export function trackCharacterLimitError(_userId: string, characterCount: number, planType: string, limit: number) {
   trackEvent('character_limit_error', {
     character_count: characterCount,
     plan_type: planType,
@@ -144,7 +144,7 @@ export function trackPricingPageVisit(userId?: string) {
 /**
  * Track dashboard visit
  */
-export function trackDashboardVisit(userId: string, planType: string) {
+export function trackDashboardVisit(_userId: string, planType: string) {
   trackEvent('dashboard_visited', {
     plan_type: planType,
     timestamp: new Date().toISOString(),
@@ -154,7 +154,7 @@ export function trackDashboardVisit(userId: string, planType: string) {
 /**
  * Track history view
  */
-export function trackHistoryView(userId: string, historyCount: number) {
+export function trackHistoryView(_userId: string, historyCount: number) {
   trackEvent('history_viewed', {
     history_count: historyCount,
     timestamp: new Date().toISOString(),
@@ -164,7 +164,7 @@ export function trackHistoryView(userId: string, historyCount: number) {
 /**
  * Track settings page visit
  */
-export function trackSettingsVisit(userId: string) {
+export function trackSettingsVisit(_userId: string) {
   trackEvent('settings_visited', {
     timestamp: new Date().toISOString(),
   });

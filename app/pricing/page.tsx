@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 function PricingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [currentPlan, setCurrentPlan] = useState<'free' | 'pro'>('free');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -44,7 +44,6 @@ function PricingContent() {
         .single();
 
       if (profile) {
-        // @ts-ignore - Type generation issue
         setCurrentPlan(profile.plan_type);
       }
     }

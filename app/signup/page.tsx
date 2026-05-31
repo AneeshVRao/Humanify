@@ -59,7 +59,7 @@ export default function SignupPage() {
 
     try {
       const supabase = createBrowserSupabaseClient();
-      const { data, error: authError } = await supabase.auth.signUp({
+      const { error: authError } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -75,7 +75,7 @@ export default function SignupPage() {
 
       // Show success message
       setSuccess(true);
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred. Please try again.');
       setIsLoading(false);
     }

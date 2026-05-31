@@ -99,8 +99,6 @@ export default function HistoryPage() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('History API response:', data);
-        console.log('Items:', data.data?.items);
         setItems(data.data.items);
         setHasMore(data.data.pagination.hasNextPage);
       } else {

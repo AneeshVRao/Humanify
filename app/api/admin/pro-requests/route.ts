@@ -4,7 +4,6 @@
  * Admin endpoint to approve or reject Pro access requests
  */
 
-import { NextRequest } from 'next/server';
 import { z } from 'zod';
 import {
   apiSuccess,
@@ -26,7 +25,7 @@ const actionSchema = z.object({
   adminNotes: z.string().optional(),
 });
 
-async function PATCH_Handler(request: NextRequest) {
+async function PATCH_Handler(request: Request) {
   const authHeader = request.headers.get('authorization');
   const token = authHeader?.replace('Bearer ', '');
 

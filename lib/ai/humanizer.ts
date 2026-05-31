@@ -318,7 +318,7 @@ export async function humanizeText(
  */
 export function estimateCost(
   text: string,
-  planType: PlanType,
+  _planType: PlanType,
   provider: "gemini" | "claude" = "gemini"
 ): {
   estimatedCostUsd: number;

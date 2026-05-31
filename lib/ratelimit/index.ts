@@ -133,7 +133,7 @@ export async function checkIpRateLimit(ip: string): Promise<RateLimitResult> {
  * Security Engineer: Check user-based rate limit (plan enforcement)
  */
 export async function checkUserRateLimit(
-  userId: string,
+  _userId: string,
   planType: PlanType
 ): Promise<RateLimitResult> {
   // Bypassed to eliminate performance bottleneck (network latency) on the critical path.
@@ -185,7 +185,7 @@ export async function getRateLimitStatus(
     const identifier = `user:${userId}`;
 
     // Get current limit without incrementing
-    // @ts-ignore - Accessing protected property
+    // @ts-expect-error - Accessing protected property
     const key = `${limiter.prefix}:${identifier}`;
     const count = await redis.get<number>(key) || 0;
     const limit = planType === 'pro' ? RATE_LIMITS.pro.hourly : RATE_LIMITS.free.daily;
@@ -253,7 +253,7 @@ export function validateCharacterLimit(text: string, planType: PlanType): void {
 export async function resetRateLimit(userId: string, planType: PlanType): Promise<void> {
   const limiter = planType === 'pro' ? proTierLimiter : freeTierLimiter;
   const identifier = `user:${userId}`;
-  // @ts-ignore - Accessing protected property
+  // @ts-expect-error - Accessing protected property
   const key = `${limiter.prefix}:${identifier}`;
 
   await redis.del(key);
@@ -263,7 +263,7 @@ export async function resetRateLimit(userId: string, planType: PlanType): Promis
  * Senior Software Developer: Get rate limit analytics
  * Returns usage patterns for a user
  */
-export async function getRateLimitAnalytics(userId: string): Promise<any> {
+export async function getRateLimitAnalytics(_userId: string): Promise<any> {
   try {
     // This would integrate with Upstash Analytics API
     // For now, return null (feature for future)

@@ -219,9 +219,9 @@ export function sanitizeErrorMessage(error: any): string {
  * Catches errors and returns proper API response
  */
 export function withErrorHandler(
-  handler: (request: Request, context?: any) => Promise<NextResponse>
+  handler: (request: any, context?: any) => Promise<NextResponse>
 ) {
-  return async (request: Request, context?: any): Promise<NextResponse> => {
+  return async (request: any, context?: any): Promise<NextResponse> => {
     const requestId = generateRequestId();
 
     try {
@@ -270,7 +270,7 @@ export async function validateJsonRequest(request: Request): Promise<any> {
 
   try {
     return await request.json();
-  } catch (error) {
+  } catch {
     throw new ApiError(
       ApiErrorCode.VALIDATION_ERROR,
       'Invalid JSON in request body',

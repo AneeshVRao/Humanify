@@ -11,11 +11,10 @@
  * - Usage tracking
  */
 
-import { NextRequest } from "next/server";
+
 import { z } from "zod";
 import {
   apiSuccess,
-  apiError,
   withErrorHandler,
   ApiError,
   ApiErrorCode,
@@ -44,7 +43,7 @@ const humanizeSchema = z.object({
 /**
  * Security Engineer: POST handler with comprehensive security
  */
-async function POST_Handler(request: NextRequest) {
+async function POST_Handler(request: Request) {
   // Step 1: Get client info for rate limiting and logging
   const clientIp = getClientIp(request);
   const userAgent = getUserAgent(request);
@@ -165,7 +164,7 @@ async function POST_Handler(request: NextRequest) {
     ai_score_after: humanizationResult.aiScoreAfter,
   };
 
-  const { data: savedHumanization, error: saveError } = await (adminSupabase
+  const { error: saveError } = await (adminSupabase
     .from("humanizations") as any)
     .insert(humanizationRecord)
     .select()

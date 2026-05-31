@@ -15,7 +15,7 @@ import {
   validateJsonRequest,
 } from '@/lib/api/utils';
 import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase/client';
-import { encrypt, decrypt } from '@/lib/encryption';
+import { encrypt } from '@/lib/encryption';
 
 /**
  * GET - Get user's API key status
