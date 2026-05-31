@@ -382,7 +382,7 @@ export default function ApiSettingsPage() {
             <CardFooter>
               <Button
                 onClick={handleSave}
-                disabled={isSaving || (!apiKey && preferredProvider === preferredProvider)}
+                disabled={isSaving || (preferredProvider === 'claude' && !hasExistingKey && !apiKey)}
                 className="gap-2"
               >
                 {isSaving ? (
