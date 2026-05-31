@@ -34,7 +34,7 @@ CREATE TABLE public.humanizations (
   user_id UUID NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
   original_text TEXT NOT NULL,
   humanized_text TEXT NOT NULL,
-  tone TEXT NOT NULL CHECK (tone IN ('casual', 'professional', 'academic', 'neutral')),
+  tone TEXT NOT NULL CHECK (tone IN ('casual', 'professional', 'academic', 'neutral', 'creative')),
   character_count INTEGER NOT NULL,
   ai_score_before DECIMAL(3,1) CHECK (ai_score_before >= 0 AND ai_score_before <= 100),
   ai_score_after DECIMAL(3,1) CHECK (ai_score_after >= 0 AND ai_score_after <= 100),
@@ -184,7 +184,12 @@ CREATE POLICY "Users can update own profile"
     auth.uid() = id AND
     -- Prevent users from changing these fields directly
     plan_type = (SELECT plan_type FROM public.users WHERE id = auth.uid()) AND
-    stripe_customer_id = (SELECT stripe_customer_id FROM public.users WHERE id = auth.uid())
+    stripe_customer_id = (SELECT stripe_customer_id FROM public.users WHERE id = auth.uid()) AND
+    daily_usage_count = (SELECT daily_usage_count FROM public.users WHERE id = auth.uid()) AND
+    daily_usage_reset_at = (SELECT daily_usage_reset_at FROM public.users WHERE id = auth.uid()) AND
+    total_humanizations = (SELECT total_humanizations FROM public.users WHERE id = auth.uid()) AND
+    total_characters_processed = (SELECT total_characters_processed FROM public.users WHERE id = auth.uid()) AND
+    subscription_status = (SELECT subscription_status FROM public.users WHERE id = auth.uid())
   );
 
 -- Humanizations policies
@@ -223,11 +228,9 @@ CREATE POLICY "Users can view own usage logs"
   FOR SELECT
   USING (auth.uid() = user_id);
 
--- Only system can insert usage logs
-CREATE POLICY "System can insert usage logs"
-  ON public.usage_logs
-  FOR INSERT
-  WITH CHECK (true);
+-- Only system can insert usage logs (via service role client, which bypasses RLS)
+-- No public INSERT policy is defined to prevent client-side log tampering and flooding
+
 
 -- API keys policies
 -- Users can view their own API keys
