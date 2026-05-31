@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "tsx --test tests/**/*.test.ts",
     "test:resend": "node test-resend.js",
     "test:emails": "node test-emails.js"
   },
