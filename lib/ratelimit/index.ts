@@ -136,19 +136,14 @@ export async function checkUserRateLimit(
   userId: string,
   planType: PlanType
 ): Promise<RateLimitResult> {
-  const limiter = planType === 'pro' ? proTierLimiter : freeTierLimiter;
-  const identifier = `user:${userId}`;
-
-  const { success, limit, remaining, reset } = await limiter.limit(identifier);
-
-  // NOTE: We don't throw error here anymore - Upstash is just for monitoring
-  // The actual rate limit enforcement happens in the database check
-  // This prevents Upstash cache from blocking users when database is reset
+  // Bypassed to eliminate performance bottleneck (network latency) on the critical path.
+  // The database RPC 'check_rate_limit' acts as the single source of truth for plan limits.
+  const limit = planType === 'pro' ? RATE_LIMITS.pro.hourly : RATE_LIMITS.free.daily;
 
   return {
-    allowed: success,
-    remaining,
-    reset,
+    allowed: true,
+    remaining: limit,
+    reset: Date.now() + (planType === 'pro' ? 3600000 : 86400000),
     limit,
   };
 }

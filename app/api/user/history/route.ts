@@ -77,7 +77,9 @@ async function GET_Handler(request: Request) {
   }
 
   if (search) {
-    query = query.or(`original_text.ilike.%${search}%,humanized_text.ilike.%${search}%`);
+    // Sanitize the search query to prevent breaking PostgREST .or() parser syntax (commas/parentheses)
+    const sanitizedSearch = search.replace(/[,()]/g, ' ');
+    query = query.or(`original_text.ilike.%${sanitizedSearch}%,humanized_text.ilike.%${sanitizedSearch}%`);
   }
 
   if (startDate) {

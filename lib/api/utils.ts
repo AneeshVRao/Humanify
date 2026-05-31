@@ -155,10 +155,15 @@ export function apiError(
 export function getClientIp(request: Request): string {
   const headers = request.headers;
 
-  // Try various headers (in order of reliability)
-  const forwardedFor = headers.get('x-forwarded-for');
-  if (forwardedFor) {
-    return forwardedFor.split(',')[0].trim();
+  // Try platform secure headers first (non-spoofable by client when hosted on Vercel/Cloudflare)
+  const vercelIp = headers.get('x-vercel-ip');
+  if (vercelIp) {
+    return vercelIp.trim();
+  }
+
+  const cfConnectingIp = headers.get('cf-connecting-ip');
+  if (cfConnectingIp) {
+    return cfConnectingIp.trim();
   }
 
   const realIp = headers.get('x-real-ip');
@@ -166,12 +171,12 @@ export function getClientIp(request: Request): string {
     return realIp.trim();
   }
 
-  const cfConnectingIp = headers.get('cf-connecting-ip'); // Cloudflare
-  if (cfConnectingIp) {
-    return cfConnectingIp.trim();
+  const forwardedFor = headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0].trim();
   }
 
-  // Fallback (shouldn't happen with proxies)
+  // Fallback
   return 'unknown';
 }
 
