@@ -89,6 +89,7 @@ Humanify is a **production-ready SaaS application** that converts AI-generated c
 - **Secure Storage**: AES-256-GCM encryption for sensitive data (API keys)
 - **Input Validation**: Zod schemas for all API endpoints
 - **Safe Error Logging**: No sensitive data exposed in logs
+- **Automated Testing**: Test suite running via `tsx --test` verifying authentication, Stripe API configurations, client IP resolution, and utility functions
 
 ### ⚠️ Partially Implemented
 
@@ -98,7 +99,6 @@ Humanify is a **production-ready SaaS application** that converts AI-generated c
 ### ❌ Not Yet Implemented
 
 - **Google OAuth**: Buttons removed (email/password only for now)
-- **Automated Testing**: No test suite (manual testing only)
 - **Advanced Analytics Dashboard**: Basic tracking only
 - **Bulk Processing**: Single text only
 - **Multi-language Support**: English only
@@ -319,11 +319,10 @@ WHERE email = 'your-email@example.com';
 
 ## Known Limitations
 
-1. **No Automated Tests**: Currently relies on manual testing
-2. **Rate Limit Bypass**: Users can create multiple accounts (consider device fingerprinting)
-3. **No Query Optimization**: May be slow with large datasets (needs server-side pagination)
-4. **Type Safety**: Some @ts-ignore comments due to Supabase type generation issues
-5. **Manual Pro Approvals**: No automated payment flow (waitlist model only)
+1. **Rate Limit Bypass**: Users can create multiple accounts (consider device fingerprinting)
+2. **No Query Optimization**: May be slow with large datasets (needs server-side pagination)
+3. **Type Safety**: Some @ts-ignore comments due to Supabase type generation issues
+4. **Manual Pro Approvals**: No automated payment flow (waitlist model only)
 
 ## Contributing
 

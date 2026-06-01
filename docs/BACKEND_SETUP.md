@@ -342,4 +342,4 @@ Now you can:
 3. Implement Stripe payments
 4. Deploy to production
 
-See `AUTHENTICATION_SETUP.md` for next steps!
+See README.md for next steps!

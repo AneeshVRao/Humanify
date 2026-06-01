@@ -1,5 +1,9 @@
 # Stripe Integration Setup Guide
 
+> [!IMPORTANT]
+> **Status:** Code complete, but currently inactive/disabled.
+> The application is configured to use a manual waitlist/approval model (`/admin/pro-requests`) for Pro upgrades, bypassing direct payments. Follow this guide when activating automated billing in the future.
+
 Complete guide to setting up Stripe payments for Humanify's Pro plan.
 
 ## Prerequisites

@@ -15,10 +15,16 @@
 
 1. In your Supabase dashboard, go to **SQL Editor**
 2. Click "New Query"
-3. Copy the entire contents of `/supabase/migrations/20250101000000_initial_schema.sql`
-4. Paste into the SQL editor
-5. Click "Run" or press Ctrl+Enter
-6. Verify success: You should see "Success. No rows returned"
+3. Copy and run the SQL migration files located in `/supabase/migrations/` in chronological order:
+   - `20250101000000_initial_schema.sql` (Initial Schema)
+   - `20250112000000_add_razorpay_fields.sql` (Razorpay fields)
+   - `20250112000001_add_claude_api_key.sql` (Claude API key integration)
+   - `20250112000002_update_rate_limits.sql` (Updated rate limits structure)
+   - `20250112000003_pro_requests.sql` (Pro Plan requests database for waitlist)
+   - `20250112000004_add_admin_role.sql` (Admin role checks)
+   - `20250112000005_admin_pro_requests_rls.sql` (Admin Pro requests RLS policy)
+4. Paste the SQL contents and click "Run" (run each sequentially).
+5. Verify success: You should see "Success. No rows returned" for each query executed.
 
 ## Step 3: Configure Authentication
 
@@ -71,9 +77,10 @@
    - ✅ subscriptions
    - ✅ usage_logs
    - ✅ api_keys
+   - ✅ pro_requests (Waitlist / manual approval requests)
 
 3. Go to **Database** → **Policies**
-4. Verify RLS is enabled on all tables
+4. Verify RLS is enabled on all tables (including the `pro_requests` table to secure user/admin checks).
 
 ## Step 6: Test Authentication
 

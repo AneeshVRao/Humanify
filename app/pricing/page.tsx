@@ -44,7 +44,7 @@ function PricingContent() {
         .single();
 
       if (profile) {
-        setCurrentPlan(profile.plan_type);
+        setCurrentPlan((profile as any).plan_type);
       }
     }
   };

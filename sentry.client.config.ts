@@ -29,7 +29,7 @@ Sentry.init({
   ],
 
   // Filter out sensitive data
-  beforeSend(event, hint) {
+  beforeSend(event) {
     // Don't send events with API keys in the error message
     const errorMessage = event.exception?.values?.[0]?.value || '';
     if (errorMessage.includes('sk-ant-') || errorMessage.includes('API_KEY')) {
