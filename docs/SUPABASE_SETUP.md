@@ -15,16 +15,11 @@
 
 1. In your Supabase dashboard, go to **SQL Editor**
 2. Click "New Query"
-3. Copy and run the SQL migration files located in `/supabase/migrations/` in chronological order:
-   - `20250101000000_initial_schema.sql` (Initial Schema)
-   - `20250112000000_add_razorpay_fields.sql` (Razorpay fields)
-   - `20250112000001_add_claude_api_key.sql` (Claude API key integration)
-   - `20250112000002_update_rate_limits.sql` (Updated rate limits structure)
-   - `20250112000003_pro_requests.sql` (Pro Plan requests database for waitlist)
-   - `20250112000004_add_admin_role.sql` (Admin role checks)
-   - `20250112000005_admin_pro_requests_rls.sql` (Admin Pro requests RLS policy)
-4. Paste the SQL contents and click "Run" (run each sequentially).
-5. Verify success: You should see "Success. No rows returned" for each query executed.
+3. Copy the entire contents of the combined schema file: `supabase/combined_schema.sql`
+4. Paste the SQL contents into the editor and click "Run" (or press Ctrl+Enter).
+5. Verify success: You should see "Success. No rows returned".
+
+*(Alternatively, you can copy and run the SQL migration files located in `/supabase/migrations/` sequentially in chronological order: from `20250101000000_initial_schema.sql` through to `20250112000005_admin_pro_requests_rls.sql`)*
 
 ## Step 3: Configure Authentication
 
